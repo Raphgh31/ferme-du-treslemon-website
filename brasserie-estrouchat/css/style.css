@@ -1,0 +1,293 @@
+/* Brasserie L'Estrouchat */
+
+/* Polices hébergées sur le site (pas d'appel à Google Fonts) */
+@font-face { font-family: "Barlow"; src: url("../fonts/barlow-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/barlow-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/barlow-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/barlow-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Barlow Condensed"; src: url("../fonts/barlow-condensed-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Barlow Condensed"; src: url("../fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+:root {
+  --ink: #1d1c1a;
+  --ink-soft: #55524c;
+  --line: #dcd8d0;
+  --bg: #ffffff;
+  --stone: #f1efea;
+  --amber: #b9601a;
+  --amber-dark: #96490f;
+  --header-h: 76px;
+  --pager-h: 68px;
+  --head: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  overflow: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 {
+  font-family: var(--head);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  line-height: 1.02;
+  margin: 0 0 .5em;
+}
+h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); }
+h3 { font-size: 1.45rem; }
+p { margin: 0 0 1em; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: fixed; inset: 0 0 auto 0;
+  height: var(--header-h);
+  display: flex; align-items: center; gap: 32px;
+  padding: 0 32px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  z-index: 10;
+}
+.brand img { height: 50px; width: auto; }
+.tabs { display: flex; gap: 4px; margin-left: auto; }
+.tabs a {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 1.12rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 3px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.tabs a:hover { color: var(--ink); background: var(--stone); }
+.tabs a[aria-current="page"] { color: #fff; background: var(--ink); }
+.header-phone {
+  font-weight: 600; text-decoration: none; white-space: nowrap;
+  padding-left: 24px; border-left: 1px solid var(--line);
+}
+.header-phone:hover { color: var(--amber); }
+
+/* ---------- Slider ---------- */
+.viewport {
+  position: fixed;
+  top: var(--header-h); bottom: var(--pager-h); left: 0; right: 0;
+  overflow: hidden;
+}
+.track {
+  display: flex; height: 100%;
+  transition: transform .55s cubic-bezier(.65, 0, .25, 1);
+  will-change: transform;
+}
+.page {
+  flex: 0 0 100%; height: 100%;
+  overflow-y: auto; overscroll-behavior: contain;
+  position: relative;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 48px 40px; }
+@media (prefers-reduced-motion: reduce) { .track { transition: none; } }
+
+/* ---------- Buttons ---------- */
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 24px; }
+.btn {
+  display: inline-block;
+  font-family: var(--head); font-weight: 600; font-size: 1.1rem;
+  text-transform: uppercase; letter-spacing: .05em;
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 2px solid transparent; border-radius: 3px;
+  cursor: pointer;
+}
+.btn-amber { background: var(--amber); color: #fff; }
+.btn-amber:hover { background: var(--amber-dark); }
+.btn-ghost { border-color: rgba(255,255,255,.8); color: #fff; }
+.btn-ghost:hover { background: #fff; color: var(--ink); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #000; }
+.btn-line { border-color: var(--ink); }
+.btn-line:hover { background: var(--ink); color: #fff; }
+
+/* ---------- Accueil ---------- */
+.page-home { color: #fff; background: #2b2a26; overflow: hidden; }
+.home-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.home-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(16,15,13,.82) 0%, rgba(16,15,13,.55) 38%, rgba(16,15,13,0) 68%);
+}
+.home-content {
+  position: absolute; left: 0; bottom: 0;
+  max-width: 760px;
+  padding: 0 40px 56px 56px;
+}
+.home-content h1 { font-size: clamp(2.6rem, 5vw, 4.4rem); margin-bottom: .35em; }
+.lead { font-size: 1.15rem; max-width: 34em; color: rgba(255,255,255,.9); }
+.home-card {
+  position: absolute; right: 40px; bottom: 40px;
+  background: #fff; color: var(--ink);
+  padding: 20px 24px; border-radius: 4px;
+  font-size: .98rem; line-height: 1.5;
+  box-shadow: 0 6px 24px rgba(0,0,0,.25);
+}
+.home-card p:last-child { margin: 0; }
+.muted { color: var(--ink-soft); }
+.status { display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: .6em; }
+.status .dot { width: 9px; height: 9px; border-radius: 50%; background: #9a958c; }
+.status.is-open .dot { background: #3e9b4f; box-shadow: 0 0 0 3px rgba(62,155,79,.2); }
+
+/* ---------- Bières ---------- */
+.beers-head { display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: center; margin-bottom: 32px; }
+.beers-head p { max-width: 38em; color: var(--ink-soft); margin: 0; }
+.beers-photo { width: 100%; height: 170px; object-fit: cover; border-radius: 4px; }
+.beer-list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+}
+.beer {
+  padding: 22px 26px 22px 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.beer:not(:nth-child(3n+1)) { padding-left: 26px; border-left: 1px solid var(--line); }
+.beer h3 { display: flex; align-items: center; gap: 10px; margin-bottom: .2em; }
+.beer h3::before {
+  content: ""; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--label); flex: none;
+}
+.beer-meta { font-weight: 600; color: var(--amber-dark); font-size: .95rem; margin-bottom: .5em; }
+.beer p:last-child { margin: 0; color: var(--ink-soft); font-size: .98rem; }
+
+/* ---------- Brasserie ---------- */
+.page-about { background: var(--stone); }
+.about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: start; }
+.about-text > p { font-size: 1.08rem; max-width: 36em; }
+.facts { margin: 32px 0 0; }
+.facts div { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid #d3cec4; }
+.facts dt { font-family: var(--head); font-weight: 700; text-transform: uppercase; font-size: 1.15rem; }
+.facts dd { margin: 0; color: var(--ink-soft); }
+.about-photo { margin: 0; }
+.about-photo img { width: 100%; border-radius: 4px; }
+.about-drawing { margin: 28px 0 0; padding: 20px; background: #fff; border-radius: 4px; }
+.about-drawing figcaption { font-size: .9rem; color: var(--ink-soft); margin-top: 10px; font-style: italic; }
+
+/* ---------- Visite ---------- */
+.visit-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; height: 100%; }
+.hours { border-collapse: collapse; width: 100%; max-width: 380px; margin: 8px 0 24px; }
+.hours th, .hours td { text-align: left; padding: 5px 10px; border-bottom: 1px solid var(--line); font-weight: 400; }
+.hours th { font-weight: 600; width: 50%; }
+.hours tr.is-today { background: var(--stone); }
+.hours tr.is-today th::after { content: " · aujourd'hui"; font-weight: 400; color: var(--amber-dark); font-size: .9rem; }
+address { font-style: normal; margin-bottom: 8px; }
+.note { font-size: .95rem; color: var(--ink-soft); border-left: 3px solid var(--amber); padding-left: 14px; max-width: 32em; }
+.map { min-height: 360px; border-radius: 4px; overflow: hidden; background: var(--stone) url("../img/logo-ink.png") center / 60% auto no-repeat; }
+.map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; display: block; }
+
+/* ---------- Contact ---------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.contact-list { list-style: none; padding: 0; margin: 0 0 32px; }
+.contact-list li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.contact-list span { color: var(--ink-soft); font-size: .92rem; padding-top: 2px; }
+.contact-list a { font-weight: 600; text-decoration: none; word-break: break-word; }
+.contact-list a:hover { color: var(--amber); }
+.pro { background: var(--stone); padding: 22px 24px; border-radius: 4px; }
+.pro p { margin: 0; color: var(--ink-soft); }
+.form { display: grid; gap: 16px; align-content: start; background: var(--stone); padding: 28px; border-radius: 4px; }
+.form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form label { display: grid; gap: 6px; font-weight: 600; font-size: .95rem; }
+.form input, .form select, .form textarea {
+  font: inherit; font-weight: 400;
+  padding: 10px 12px;
+  border: 1px solid #c9c4ba; border-radius: 3px;
+  background: #fff; color: var(--ink);
+}
+.form input:focus, .form select:focus, .form textarea:focus { outline: 2px solid var(--amber); outline-offset: 0; border-color: var(--amber); }
+.form .btn { justify-self: start; }
+.form-hint { font-size: .85rem; color: var(--ink-soft); margin: 0; }
+
+/* ---------- Pager ---------- */
+.pager {
+  position: fixed; inset: auto 0 0 0;
+  height: var(--pager-h);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: 0 24px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  z-index: 10;
+}
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: none; border: 0; padding: 10px 6px;
+  font-family: var(--head); font-weight: 600; font-size: 1.1rem;
+  text-transform: uppercase; letter-spacing: .04em;
+  color: var(--ink); cursor: pointer;
+}
+.pager-btn svg {
+  width: 38px; height: 38px; padding: 8px;
+  border: 1.5px solid var(--ink); border-radius: 50%;
+  fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  transition: background .2s, color .2s;
+}
+.pager-btn:hover svg { background: var(--ink); stroke: #fff; }
+.pager-btn:disabled { visibility: hidden; }
+.pager-prev { justify-self: start; }
+.pager-next { justify-self: end; }
+.pager-mid { text-align: center; }
+.segments { display: flex; gap: 6px; justify-content: center; margin-bottom: 6px; }
+.segments button {
+  width: 34px; height: 14px; padding: 0; border: 0; background: none; cursor: pointer; position: relative;
+}
+.segments button::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 3px; border-radius: 2px; background: var(--line);
+  transition: background .3s;
+}
+.segments button[aria-current="true"]::after { background: var(--amber); }
+.legal { margin: 0; font-size: .74rem; color: var(--ink-soft); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .header-phone { display: none; }
+  .beer-list { grid-template-columns: repeat(2, 1fr); }
+  .beer:not(:nth-child(3n+1)) { padding-left: 0; border-left: 0; }
+  .beer:nth-child(even) { padding-left: 24px; border-left: 1px solid var(--line); }
+}
+
+@media (max-width: 860px) {
+  :root { --header-h: 108px; --pager-h: 74px; }
+  body { font-size: 16px; }
+  .site-header { flex-direction: column; align-items: stretch; justify-content: center; gap: 8px; padding: 8px 0 0; }
+  .brand { align-self: center; }
+  .brand img { height: 40px; }
+  .tabs { margin: 0; overflow-x: auto; scrollbar-width: none; padding: 0 12px 8px; gap: 2px; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs a { font-size: 1rem; padding: 6px 10px; }
+  .wrap { padding: 32px 20px; }
+
+  .home-shade { background: linear-gradient(0deg, rgba(16,15,13,.88) 0%, rgba(16,15,13,.6) 50%, rgba(16,15,13,.1) 100%); }
+  .home-content { position: relative; padding: 32px 20px 20px; max-width: none; }
+  .page-home { display: flex; flex-direction: column; justify-content: flex-end; overflow-y: auto; }
+  .home-card { position: relative; right: auto; bottom: auto; margin: 0 20px 24px; }
+  .lead { font-size: 1.02rem; }
+
+  .beers-head, .about-grid, .visit-grid, .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+  .beers-photo { height: 150px; }
+  .beer-list { grid-template-columns: 1fr; }
+  .beer, .beer:nth-child(even), .beer:not(:nth-child(3n+1)) { padding: 18px 0; border-left: 0; }
+  .facts div { grid-template-columns: 1fr; gap: 4px; }
+  .visit-grid { height: auto; }
+  .form .row { grid-template-columns: 1fr; }
+  .form { padding: 20px; }
+
+  .pager { padding: 0 12px; }
+  .pager-btn span { display: none; }
+  .legal { font-size: .7rem; max-width: 220px; }
+}
